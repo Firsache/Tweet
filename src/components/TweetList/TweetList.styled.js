@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+
+export const Wrapper = styled.div`
+  margin: 32px auto;
+`;
 export const TweetsList = styled.ul`
-  padding: 32px;
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
