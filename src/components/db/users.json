@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "user": "Elon Reeve Musk",
+    "tweets": 777,
+    "followers": 100500,
+    "avatar": "https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
+  },
+  {
+    "id": 2,
+    "user": "Bob Lee",
+    "tweets": 555,
+    "followers": 100100,
+    "avatar": "https://i.pinimg.com/474x/8d/da/39/8dda39d89cea777270772bb62782035c.jpg"
+  },
+  {
+    "id": 3,
+    "user": "Ann May",
+    "tweets": 435,
+    "followers": 100300,
+    "avatar": "https://static.vecteezy.com/system/resources/previews/001/993/889/non_2x/beautiful-latin-woman-avatar-character-icon-free-vector.jpg"
+  },
+  {
+    "id": 4,
+    "user": "Sam Smith",
+    "tweets": 977,
+    "followers": 100900,
+    "avatar": "https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
+  },
+  {
+    "id": 5,
+    "user": "Jim Johnson",
+    "tweets": 737,
+    "followers": 100700,
+    "avatar": "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
+  },
+  {
+    "id": 6,
+    "user": "Marry Blood",
+    "tweets": 999,
+    "followers": 100600,
+    "avatar": "https://static.vecteezy.com/system/resources/previews/002/002/297/original/beautiful-woman-avatar-character-icon-free-vector.jpg"
+  },
+  {
+    "id": 7,
+    "user": "Lucy Lucky",
+    "tweets": 777,
+    "followers": 100777,
+    "avatar": "https://static.vecteezy.com/system/resources/previews/002/002/257/original/beautiful-woman-avatar-character-icon-free-vector.jpg"
+  }
+]
