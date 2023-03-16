@@ -1,26 +1,36 @@
+import { loadFromLS, saveToLS } from 'helpers/localStorage';
 import { useEffect, useRef, useState } from 'react';
 
 export const Tweet = ({ id, user, tweets, followers, avatar }) => {
-  const initialUserFollowers = followers;
   const STORAGE_FOLLOWERS_KEY = 'followersAmount';
   const STORAGE_IS_FOLLOWING_KEY = 'isFollowingAmount';
 
-  const parsedFollowers = JSON.parse(
-    localStorage.getItem(STORAGE_FOLLOWERS_KEY)
-  );
-  const parsedIsFollowing = JSON.parse(
-    localStorage.getItem(STORAGE_IS_FOLLOWING_KEY)
-  );
+  const parsedFollowers = loadFromLS(STORAGE_FOLLOWERS_KEY);
+  const parsedIsFollowing = loadFromLS(STORAGE_IS_FOLLOWING_KEY);
 
   const [isFollowing, setIsFollowing] = useState(
     () => parsedIsFollowing[id] ?? false
+    // () => {
+    //   if (parsedIsFollowing !== null) {
+    //     return parsedIsFollowing[id];
+    //   } else {
+    //     return false;
+    //   }
+    // }
   );
 
   const [currentFollowers, setCurrentFollowers] = useState(
-    () => parsedFollowers[id] ?? initialUserFollowers
+    () => parsedFollowers[id] ?? followers
+    // () => {
+    //   if (parsedFollowers !== null) {
+    //     return parsedIsFollowing[id];
+    //   } else {
+    //     return followers;
+    //   }
+    // }
   );
-  const firstRender = useRef(true);
 
+  const firstRender = useRef(true);
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -29,16 +39,26 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
     const followersData = parsedFollowers;
     followersData[id] = currentFollowers;
 
-    localStorage.setItem(STORAGE_FOLLOWERS_KEY, JSON.stringify(followersData));
+    saveToLS(STORAGE_FOLLOWERS_KEY, followersData);
 
+    // localStorage.setItem(STORAGE_FOLLOWERS_KEY, JSON.stringify(followersData));
+  }, [currentFollowers, id, parsedFollowers]);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     const isFollowingData = parsedIsFollowing;
     isFollowingData[id] = isFollowing;
 
-    localStorage.setItem(
-      STORAGE_IS_FOLLOWING_KEY,
-      JSON.stringify(isFollowingData)
-    );
-  }, [currentFollowers, id, isFollowing, parsedFollowers, parsedIsFollowing]);
+    saveToLS(STORAGE_IS_FOLLOWING_KEY, isFollowingData);
+
+    // localStorage.setItem(
+    //   STORAGE_IS_FOLLOWING_KEY,
+    //   JSON.stringify(isFollowingData)
+    // );
+  }, [id, isFollowing, parsedIsFollowing]);
 
   const handleFollowBtnClick = () => {
     if (isFollowing) {
