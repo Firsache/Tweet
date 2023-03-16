@@ -4,10 +4,18 @@ export const saveToLS = (key, value) => {
   }
 };
 
-export const loadFromLS = key => {
+// export const loadFromLS = key => {
+//   try {
+//     return JSON.parse(localStorage.getItem(key)) || {};
+//   } catch (e) {
+//     return localStorage.getItem(key);
+//   }
+// };
+
+export const parseDataFromLS = (key, initialValue = []) => {
   try {
-    return JSON.parse(localStorage.getItem(key)) || {};
+    return JSON.parse(localStorage.getItem(key)) ?? initialValue;
   } catch (e) {
-    return localStorage.getItem(key);
+    return initialValue;
   }
 };
