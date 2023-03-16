@@ -8,7 +8,6 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    min-height: 100vh;
     font-style: normal;
     color: #000;
   }
