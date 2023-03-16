@@ -7,6 +7,14 @@ export const Container = styled.div`
   gap: 88px;
 `;
 
+export const LogoImg = styled.img`
+  width: 76px;
+  height: 22px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+`;
+
 export const AvatarImg = styled.img`
   width: 62px;
   height: 62px;
@@ -64,7 +72,6 @@ export const TweetInfo = styled.div`
   text-transform: uppercase;
 
   color: #ebd8ff;
-  /* align-items: center; */
 `;
 
 export const Button = styled.button`
@@ -93,6 +100,6 @@ export const Button = styled.button`
   &:hover,
   &:focus,
   &:active {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
 `;
