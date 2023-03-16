@@ -1,20 +1,23 @@
-import { loadFromLS, saveToLS } from 'helpers/localStorage';
+import { parseDataFromLS, saveToLS } from 'helpers/localStorage';
 import { useEffect, useRef, useState } from 'react';
-import { AvatarImg, Button, EllipceImg } from './Tweet.styled';
+import {
+  Container,
+  AvatarImg,
+  Button,
+  EllipceImg,
+  TweetInfo,
+  Divider,
+} from './Tweet.styled';
+
+const STORAGE_FOLLOWERS_KEY = 'followersAmount';
+const STORAGE_IS_FOLLOWING_KEY = 'isFollowingAmount';
 
 export const Tweet = ({ id, user, tweets, followers, avatar }) => {
-  const STORAGE_FOLLOWERS_KEY = 'followersAmount';
-  const STORAGE_IS_FOLLOWING_KEY = 'isFollowingAmount';
-
-  const parsedFollowers = loadFromLS(STORAGE_FOLLOWERS_KEY);
-  const parsedIsFollowing = loadFromLS(STORAGE_IS_FOLLOWING_KEY);
-
   const [isFollowing, setIsFollowing] = useState(
-    () => parsedIsFollowing[id] ?? false
+    () => parseDataFromLS(STORAGE_IS_FOLLOWING_KEY)[id] ?? false
   );
-
   const [currentFollowers, setCurrentFollowers] = useState(
-    () => parsedFollowers[id] ?? followers
+    () => parseDataFromLS(STORAGE_FOLLOWERS_KEY)[id] ?? followers
   );
 
   const firstRender = useRef(true);
@@ -23,22 +26,22 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
       firstRender.current = false;
       return;
     }
-    const followersData = parsedFollowers;
+    const followersData = parseDataFromLS(STORAGE_FOLLOWERS_KEY);
     followersData[id] = currentFollowers;
 
     saveToLS(STORAGE_FOLLOWERS_KEY, followersData);
-  }, [currentFollowers, id, parsedFollowers]);
+  }, [currentFollowers, id]);
 
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
       return;
     }
-    const isFollowingData = parsedIsFollowing;
+    const isFollowingData = parseDataFromLS(STORAGE_IS_FOLLOWING_KEY);
     isFollowingData[id] = isFollowing;
 
     saveToLS(STORAGE_IS_FOLLOWING_KEY, isFollowingData);
-  }, [id, isFollowing, parsedIsFollowing]);
+  }, [id, isFollowing]);
 
   const handleFollowBtnClick = () => {
     if (isFollowing) {
@@ -51,16 +54,20 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
     }
   };
   return (
-    <>
+    <Container>
+      <>top</>
+      <Divider />
       <EllipceImg>
         <AvatarImg src={avatar} alt={user} />
       </EllipceImg>
+      <TweetInfo>
+        <p>{tweets} tweets</p>
+        <p>{currentFollowers} followers</p>
+      </TweetInfo>
 
-      <p>{tweets} tweets</p>
-      <p>{currentFollowers} followers</p>
       <Button onClick={handleFollowBtnClick} isFollowing={isFollowing}>
         {isFollowing ? 'Following' : 'Follow'}
       </Button>
-    </>
+    </Container>
   );
 };
