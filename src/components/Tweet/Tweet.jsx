@@ -1,5 +1,6 @@
 import { loadFromLS, saveToLS } from 'helpers/localStorage';
 import { useEffect, useRef, useState } from 'react';
+import { AvatarImg, Button, EllipceImg } from './Tweet.styled';
 
 export const Tweet = ({ id, user, tweets, followers, avatar }) => {
   const STORAGE_FOLLOWERS_KEY = 'followersAmount';
@@ -10,24 +11,10 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
 
   const [isFollowing, setIsFollowing] = useState(
     () => parsedIsFollowing[id] ?? false
-    // () => {
-    //   if (parsedIsFollowing !== null) {
-    //     return parsedIsFollowing[id];
-    //   } else {
-    //     return false;
-    //   }
-    // }
   );
 
   const [currentFollowers, setCurrentFollowers] = useState(
     () => parsedFollowers[id] ?? followers
-    // () => {
-    //   if (parsedFollowers !== null) {
-    //     return parsedIsFollowing[id];
-    //   } else {
-    //     return followers;
-    //   }
-    // }
   );
 
   const firstRender = useRef(true);
@@ -40,8 +27,6 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
     followersData[id] = currentFollowers;
 
     saveToLS(STORAGE_FOLLOWERS_KEY, followersData);
-
-    // localStorage.setItem(STORAGE_FOLLOWERS_KEY, JSON.stringify(followersData));
   }, [currentFollowers, id, parsedFollowers]);
 
   useEffect(() => {
@@ -53,11 +38,6 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
     isFollowingData[id] = isFollowing;
 
     saveToLS(STORAGE_IS_FOLLOWING_KEY, isFollowingData);
-
-    // localStorage.setItem(
-    //   STORAGE_IS_FOLLOWING_KEY,
-    //   JSON.stringify(isFollowingData)
-    // );
   }, [id, isFollowing, parsedIsFollowing]);
 
   const handleFollowBtnClick = () => {
@@ -72,12 +52,15 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
   };
   return (
     <>
-      <img src={avatar} alt={user} width="62" />
+      <EllipceImg>
+        <AvatarImg src={avatar} alt={user} />
+      </EllipceImg>
+
       <p>{tweets} tweets</p>
       <p>{currentFollowers} followers</p>
-      <button onClick={handleFollowBtnClick} isFollowing={isFollowing}>
+      <Button onClick={handleFollowBtnClick} isFollowing={isFollowing}>
         {isFollowing ? 'Following' : 'Follow'}
-      </button>
+      </Button>
     </>
   );
 };
