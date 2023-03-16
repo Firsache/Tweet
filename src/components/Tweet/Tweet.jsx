@@ -7,6 +7,8 @@ import {
   EllipceImg,
   TweetInfo,
   Divider,
+  Bottom,
+  TopImg,
 } from './Tweet.styled';
 
 const STORAGE_FOLLOWERS_KEY = 'followersAmount';
@@ -55,19 +57,21 @@ export const Tweet = ({ id, user, tweets, followers, avatar }) => {
   };
   return (
     <Container>
-      <>top</>
+      <TopImg />
       <Divider />
       <EllipceImg>
         <AvatarImg src={avatar} alt={user} />
       </EllipceImg>
-      <TweetInfo>
-        <p>{tweets} tweets</p>
-        <p>{currentFollowers} followers</p>
-      </TweetInfo>
+      <Bottom>
+        <TweetInfo>
+          <p>{tweets} tweets</p>
+          <p>{currentFollowers} followers</p>
+        </TweetInfo>
 
-      <Button onClick={handleFollowBtnClick} isFollowing={isFollowing}>
-        {isFollowing ? 'Following' : 'Follow'}
-      </Button>
+        <Button onClick={handleFollowBtnClick} isFollowing={isFollowing}>
+          {isFollowing ? 'Following' : 'Follow'}
+        </Button>
+      </Bottom>
     </Container>
   );
 };
