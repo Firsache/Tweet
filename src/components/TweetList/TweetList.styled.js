@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  margin: 32px auto;
+  /* margin: 32px auto; */
+  margin: 32px 64px;
+  width: 100%;
 `;
 export const TweetsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 20px;
 `;
 
 export const TweetItem = styled.li`
