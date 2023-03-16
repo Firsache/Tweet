@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 export const TweetsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 48px;
 `;
 
 export const TweetItem = styled.li`
